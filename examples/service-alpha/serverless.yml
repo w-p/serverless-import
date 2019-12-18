@@ -1,0 +1,47 @@
+import: ../shared.yml
+
+service: alpha-service
+
+provider:
+  region: us-west-2
+  environment:
+    LOG_LEVEL: debug
+
+package:
+  individually: true
+
+plugins:
+  - serverless-import
+  - serverless-iam-roles-per-function
+
+custom:
+  variables:
+    - foo
+    - bar
+    - baz
+
+function:
+  solveProblem:
+    handler: src/solveProblem.handler
+    iamRoleStatements:
+      - ${partial:roles.invoke-foo}
+      - ${partial:roles.read-bar-table}
+  storeInSQL:
+    handler: src/storeInSQL.handler
+    iamRoleStatements:
+      - ${partial:roles.read-secret}
+
+resources:
+  Outputs:
+    SolveProblemArn:
+      Description: 'ARN of the Problem Solver'
+      Value:
+        'Fn::GetAtt': [SolveProblemFunction, Arn]
+      Export:
+        Name: ${self:service}:${self:provider.stage}:SolveProblemArn
+    StoreInSQLArn:
+      Description: 'ARN of the Storage Thing'
+      Value:
+        'Fn::GetAtt': [StoreInSQLFunction, Arn]
+      Export:
+        Name: ${self:service}:${self:provider.stage}:StoreInSQLArn

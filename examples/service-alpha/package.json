@@ -1,0 +1,8 @@
+{
+  "name": "serverless-merge-example",
+  "version": "0.0.1",
+  "description": "An example of the serverless-merge plugin.",
+  "dependencies": {
+    "serverless-iam-roles-per-function": "^2.0.2"
+  }
+}

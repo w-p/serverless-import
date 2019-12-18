@@ -1,0 +1,25 @@
+{
+  "name": "serverless-import",
+  "version": "0.0.1",
+  "description": "Import serverless configs.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/w-p/serverless-import"
+  },
+  "keywords": [
+    "serverless"
+  ],
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Will Palmer",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15"
+  }
+}

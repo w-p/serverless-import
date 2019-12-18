@@ -1,0 +1,51 @@
+common:
+  provider:
+    deploymentBucket:
+      name: my-new-system.${opt:stage, self:provider.stage}
+    environment:
+      LOG_LEVEL: info
+      USER_POOL_ID: ${self:custom.user-pool.${opt:stage, self:provider.stage}}
+    name: aws
+    profile: my-${opt:stage, self:provider.stage}-profile
+    region: us-east-1
+    runtime: nodejs8.10
+    stackName: ${self:service}
+    stage: dev
+
+  plugins:
+    - serverless-prune-plugin
+    - serverless-stage-manager
+
+  custom:
+    prune:
+      number: 5
+      automatic: true
+    stages:
+      - dev
+      - test
+      - prod
+    user-pool:
+      dev: us-east-1_abc
+      test: us-east-1_def
+      prod: us-east-1_ghi
+
+partial:
+  roles:
+    invoke-foo:
+      Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource:
+        - arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:foo
+    read-bar-table:
+      Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource:
+        - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/bar
+    read-secret:
+      Effect: Allow
+      Action:
+        - secretsmanager:GetSecretValue
+      Resource:
+        - arn:aws:secretsmanager:#{AWS::Region}:#{AWS::AccountId}:secret:hush-*
