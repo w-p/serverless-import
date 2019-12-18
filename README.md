@@ -1,3 +1,5 @@
+Mirrored from [Gitlab](https://gitlab.com/will-p/serverless-import).
+
 # Serverless Import
 The Serverless Import plug-in provides two features:
 - import

@@ -3,19 +3,22 @@
   "version": "0.0.1",
   "description": "Import serverless configs.",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/w-p/serverless-import"
-  },
   "keywords": [
+    "aws",
+    "lambda",
+    "nodejs",
+    "javascript",
+    "typescript",
     "serverless"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/will-p/serverless-import"
+  },
   "directories": {
     "example": "examples"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "Will Palmer",
   "license": "MIT",
   "dependencies": {
